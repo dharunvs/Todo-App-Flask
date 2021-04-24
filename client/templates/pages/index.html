@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='styles/style.css')}}"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <form class="content" action="{{ url_for('add') }}" method="POST">
+      <h1>ToDo List</h1>
+      <input type="text" name="todoitem" placeholder="Add a new item" />
+      <button type="submit" class="button">Add</button>
+    </form>
+    <div class="content">
+      <div class="section">
+        <h3>Incomplete Tasks</h3>
+        <ul class="tasks">
+          {% for task in incomplete %}
+          <li>
+            <p>{{task}}</p>
+            <a class="checkbox" href="{{ url_for('complete', task=task) }}"
+              ><span></span
+            ></a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="section">
+        <h3>Completed Tasks</h3>
+        <ul>
+          {% for task in complete %}
+          <li>{{task}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
